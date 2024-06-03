@@ -1,0 +1,27 @@
+package com.migros.next.web.configuration;
+
+import org.springdoc.core.SwaggerUiConfigParameters;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class SwaggerUIConfiguration implements WebMvcConfigurer {
+
+    private final SwaggerUiConfigParameters configParameters;
+
+    public SwaggerUIConfiguration(SwaggerUiConfigParameters configParameters) {
+        this.configParameters = configParameters;
+        configureParameters();
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/", "/swagger-ui.html");
+    }
+
+    private void configureParameters() {
+        configParameters.setDocExpansion("none");
+    }
+
+}
